@@ -8,13 +8,13 @@ from .utils import *
 
 class YOLOv5Detect:
     """
-    https://github.com/openvinotoolkit/openvino/blob/master/samples/python/classification_sample_async/classification_sample_async.py
+    https://github.com/openvinotoolkit/openvino/blob/master/samples/python/
     """
     def __init__(self, inferdev, net, **kwargs):
         net = Path(net)
 
         core = Core()
-        model = core.read_model(model=net.with_suffix(".xml"), weights=net.with_suffix(".bin"))
+        model = core.read_model(model=net.with_suffix(".xml"), weights=net.with_suffix(".bin"))  # 这里的model需要包含网络的head
         self._infersz = tuple(model.inputs[0].shape)[2:]
         self.cmodel = core.compile_model(model, inferdev)
 
